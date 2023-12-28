@@ -45,7 +45,7 @@ export interface Client {
 }
 // Provider model types
 export interface Provider {
-  rut_id: number
+  rut_id: string
   name: string
   address_id: string
   address: AddressType
