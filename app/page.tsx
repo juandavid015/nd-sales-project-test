@@ -1,15 +1,16 @@
-'use client';
+import FirstSection from './components/landing-page/FirstSection';
+import Hero from './components/landing-page/Hero';
+import SecondSection from './components/landing-page/SecondSection';
 
-import { useEffect } from 'react';
-import db from './db';
-
-export default function Home() {
-  useEffect(() => {
-    console.log(db);
-  }, []);
+function Home() {
   return (
-    <main>
-      Home
+    <main className="min-h-screen h-full w-full text-paragraph-color
+    font-medium"
+    >
+      <Hero />
+      <FirstSection />
+      <SecondSection />
     </main>
   );
 }
+export default Home;
