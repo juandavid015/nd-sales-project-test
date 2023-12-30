@@ -86,11 +86,3 @@ export interface Database {
   branch_offices: BranchOffice[] | []
   sales: Sale[] | [],
 }
-
-export type FormResult = {
-  type: 'success' | 'error' | null
-  message: string
-  data: {
-    [key:string]: any
-  }
-};

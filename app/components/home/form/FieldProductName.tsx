@@ -1,13 +1,13 @@
-'use product';
+'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Product } from '@/app/types/data';
 import useClickOutside from '@/app/hooks/useClickOutside';
 import useForm from '@/app/hooks/useForm';
 import { RequestResponse } from '@/app/types/types';
 import { fetchProducts } from '@/app/services/api';
-import LoadingSpinner from '../common/LoadingSpinner';
-import { IconCheck } from '../common/Icons';
+import LoadingSpinner from '../../common/LoadingSpinner';
+import { IconCheck } from '../../common/Icons';
 
 export default function FieldProductName({ detailIndex }: { detailIndex: number }) {
   const [productName, setProductName] = useState('');
@@ -34,7 +34,7 @@ export default function FieldProductName({ detailIndex }: { detailIndex: number 
 
   // Open menu of the products search results
   const openMenu = () => {
-    if (!productResults.length) searchProduct('');
+    searchProduct('');
     setExpandMenu(true);
   };
 
@@ -76,6 +76,30 @@ export default function FieldProductName({ detailIndex }: { detailIndex: number 
   // the input search
   useClickOutside({ elementRef, onClickOutside: () => closeMenu() });
 
+  useEffect(() => {
+    // This logic has to move higher, because implicty involves the rest of fields (remind to move)
+    // so this logis makes sense to be treated on the parent that groups the related inputs
+    if (!productSelected?.branch_office_ids.includes(sale.branch_office_id)) {
+      // console.log(productSelected?.branch_office_ids, 'A');
+      setProductSelected(undefined);
+      setProductName('');
+      // setSale((prevSale) => {
+      //   const newDetail = { ...prevSale.sale_details[detailIndex] };
+      //   newDetail.quantity = 0;
+      //   newDetail.unit_price = 0;
+      //   newDetail.sub_total = 0;
+
+      //   return {
+      //     ...prevSale,
+      //     sale_details: [
+      //       ...prevSale.sale_details,
+      //       newDetail,
+      //     ],
+      //   };
+      // });
+    }
+  }, [productSelected?.branch_office_ids, sale.branch_office_id, detailIndex]);
+
   return (
     <div className="flex gap-6 pt-4 w-full relative">
       <label htmlFor="name" className="flex flex-col w-full" id="product-label">
@@ -104,7 +128,7 @@ export default function FieldProductName({ detailIndex }: { detailIndex: number 
       && (
       <div
         className="absolute top-[calc(100%+8px)] max-h-[300px] w-full
-        bg-white shadow-sm p-4 overflow-y-auto"
+        bg-white shadow-sm p-4 overflow-y-auto z-[50]"
         id="product-options"
         role="listbox"
         aria-labelledby="name"
@@ -122,7 +146,7 @@ export default function FieldProductName({ detailIndex }: { detailIndex: number 
                   aria-selected={product.id === productSelected?.id}
                   key={product.id}
                   className={`p-2 hover:bg-blue-sky hover:text-dark-blue
-                  cursor-pointer relative font-medium
+                  cursor-pointer relative font-medium z-[10000]
                   ${product.id === productSelected?.id && 'bg-blue-sky'}`}
                 >
                   {`${product.name || ''}`}

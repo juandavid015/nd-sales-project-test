@@ -3,7 +3,7 @@ import FieldProductName from './FieldProductName';
 import FieldQuantity from './FieldQuantity';
 import FieldSubtotal from './FieldSubtotal';
 import FieldPrice from './FieldPrice';
-import Button from '../common/Button';
+import Button from '../../common/Button';
 
 export default function FieldsetDetails() {
   const { sale, setSale } = useForm();
@@ -15,7 +15,7 @@ export default function FieldsetDetails() {
     unit_price: 0,
     sub_total: 0,
   };
-  // const [details, setDetails] = useState<SaleDetail[]>([initalSaleDetailValues]);
+
   const details = sale?.sale_details;
   const addNewDetail = () => {
     setSale((prevSale) => (
@@ -41,9 +41,9 @@ export default function FieldsetDetails() {
       </legend>
       <div>
         {
-          details.map((__, detailIndex) => (
+          details.map((detail, detailIndex) => (
 
-            <div className="flex gap-8 w-full">
+            <div className="flex gap-8 w-full" key={`${detail.id + detailIndex}`}>
 
               <FieldProductName detailIndex={detailIndex} />
               <FieldQuantity detailIndex={detailIndex} />

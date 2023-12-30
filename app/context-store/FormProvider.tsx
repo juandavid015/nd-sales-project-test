@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from 'react';
 import FormContext from './FormContext';
-import { FormResult, Sale } from '../types/data';
+import { Sale } from '../types/data';
+import { FormResult } from '../types/types';
 
 export default function FormProvider({ children }: React.PropsWithChildren) {
   // Default values, allows share and reset states

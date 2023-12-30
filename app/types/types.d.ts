@@ -6,3 +6,11 @@ export type RequestResponse = {
   total: number;
   totalPages: number;
 };
+
+export type FormResult = {
+  type: 'success' | 'error' | null
+  message: string
+  data: {
+    [key:string]: any
+  }
+};

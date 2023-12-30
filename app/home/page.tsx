@@ -1,4 +1,4 @@
-import FormSales from '../components/home/FormSales';
+import FormSales from '../components/home/form/FormSales';
 import HomeHeader from '../components/home/HomeHeader';
 import SalesDataProvider from '../context-store/SalesDataProvider';
 

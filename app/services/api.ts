@@ -80,21 +80,22 @@ export const fetchProducts = {
         productsData = sortData(productsData, sortBy, sortOrder);
       }
       // Filter by country if provided
+      // console.log(name, branchOfficeId);
+      productsData = productsData
+        .filter((product) => (product.branch_office_ids.includes(branchOfficeId)));
+
       if (name) {
-        productsData = productsData.filter((product) => {
-          if (product.branch_office_ids.includes(branchOfficeId)) {
-            // console.log('product', name);
-            return product.name.toLowerCase().normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, '')
-              .includes(name.toLocaleLowerCase());
-          }
-          productsData = [];
-          return false;
-        });
+        productsData = productsData.filter((product) => (
+          // console.log('product', name);
+          product.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .includes(name.toLocaleLowerCase())));
       }
+
       // Simulate a delay of 200ms to mimic an async operation
       setTimeout(() => {
+        if (!branchOfficeId) productsData = [];
         // Paginate using utility function
+        // console.log(productsData, 'DATA');
         const paginatedResult = paginate(productsData, page, limit);
 
         resolve(paginatedResult);

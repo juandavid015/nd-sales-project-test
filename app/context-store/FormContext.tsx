@@ -1,7 +1,8 @@
 'use client';
 
 import { Dispatch, SetStateAction, createContext } from 'react';
-import { FormResult, Sale } from '../types/data';
+import { Sale } from '../types/data';
+import { FormResult } from '../types/types';
 
 type ContextForm = {
   sale: Sale,

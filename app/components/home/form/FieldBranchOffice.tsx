@@ -1,14 +1,14 @@
 'use branchOffice';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { BranchOffice } from '@/app/types/data';
 import useClickOutside from '@/app/hooks/useClickOutside';
 import useForm from '@/app/hooks/useForm';
 import { RequestResponse } from '@/app/types/types';
 import { fetchBranchOffices } from '@/app/services/api';
 import { generateCountryCurrency } from '@/app/utils/country-helpers';
-import { IconAdd, IconCheck } from '../common/Icons';
-import LoadingSpinner from '../common/LoadingSpinner';
+import { IconAdd, IconCheck } from '../../common/Icons';
+import LoadingSpinner from '../../common/LoadingSpinner';
 
 export default function FieldBranchOffice() {
   const [branchOfficeName, setBranchOfficeName] = useState('');
@@ -17,7 +17,7 @@ export default function FieldBranchOffice() {
   const [isLoading, setIsLoading] = useState(false);
   const [expandMenu, setExpandMenu] = useState(false);
   const elementRef = useRef(null);
-  const { sale, setSale } = useForm();
+  const { setSale } = useForm();
 
   // Fetch clients data and handle loading state
   const searchBranchOffice = async (name: string) => {
@@ -25,9 +25,9 @@ export default function FieldBranchOffice() {
       setIsLoading(true);
       const branchOffice: RequestResponse = await fetchBranchOffices.get(undefined, name);
       setbranchOfficeResults(branchOffice.data as BranchOffice[]);
-    } catch (error) {
+    } catch (error: any) {
       // Handle errors
-      console.error(error);
+      throw new Error(error);
     } finally {
       setIsLoading(false);
     }
@@ -68,10 +68,6 @@ export default function FieldBranchOffice() {
   // the input search
   useClickOutside({ elementRef, onClickOutside: () => closeMenu() });
 
-  useEffect(() => {
-    console.log(branchOfficeResults, sale);
-  }, [branchOfficeResults, branchOfficeName, sale]);
-
   return (
     <div className="flex gap-6 pt-4 w-full relative">
       <label htmlFor="branchOffice" className="flex flex-col w-full" id="branchOffice-label">
@@ -110,7 +106,7 @@ export default function FieldBranchOffice() {
       && (
       <div
         className="absolute top-[calc(100%+8px)] max-h-[300px] w-full
-        bg-white shadow-sm p-4 overflow-y-auto"
+        bg-white shadow-sm p-4 overflow-y-auto z-[10000]"
         id="branchOffice-options"
         role="listbox"
         aria-labelledby="branchOffice"

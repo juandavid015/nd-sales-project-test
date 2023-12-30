@@ -6,9 +6,9 @@ import { Client } from '@/app/types/data';
 import useClickOutside from '@/app/hooks/useClickOutside';
 import useForm from '@/app/hooks/useForm';
 import { RequestResponse } from '@/app/types/types';
-import { IconAdd, IconCheck } from '../common/Icons';
-import LoadingSpinner from '../common/LoadingSpinner';
-import Button from '../common/Button';
+import { IconAdd, IconCheck } from '../../common/Icons';
+import LoadingSpinner from '../../common/LoadingSpinner';
+import Button from '../../common/Button';
 
 export default function FieldClient() {
   const [clientName, setClientName] = useState('');
@@ -25,9 +25,9 @@ export default function FieldClient() {
       setIsLoading(true);
       const clientResults: RequestResponse = await fetchClients.get(name);
       setClientResults(clientResults.data as Client[]);
-    } catch (error) {
+    } catch (error: any) {
       // Handle errors
-      console.error(error);
+      throw new Error(error);
     } finally {
       setIsLoading(false);
     }
@@ -68,7 +68,7 @@ export default function FieldClient() {
   useClickOutside({ elementRef, onClickOutside: () => closeMenu() });
 
   useEffect(() => {
-    console.log(clientsResults, sale);
+    // console.log(clientsResults, sale);
   }, [clientsResults, clientName, sale]);
 
   return (
@@ -109,7 +109,7 @@ export default function FieldClient() {
       && (
       <div
         className="absolute top-[calc(100%+8px)] max-h-[300px] w-full
-        bg-white shadow-sm p-4 overflow-y-auto"
+        bg-white shadow-sm p-4 overflow-y-auto z-[10000]"
         id="client-options"
         role="listbox"
         aria-labelledby="client"

@@ -1,8 +1,8 @@
 import { fetchSale } from '@/app/services/api';
 import useForm from '@/app/hooks/useForm';
 import { useRef, useState, useEffect } from 'react';
-import Button from '../common/Button';
-import LoadingSpinner from '../common/LoadingSpinner';
+import Button from '../../common/Button';
+import LoadingSpinner from '../../common/LoadingSpinner';
 
 export default function SubmitButton() {
   const {
