@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Hero() {
   return (
     <div className="w-full bg-hero-pattern bg-no-repeat bg-center bg-contain
@@ -14,13 +16,14 @@ export default function Hero() {
           sed do eiusmod tempor incididunt ut
           labore et dolore magna aliqua
         </p>
-        <button
+        <Link
+          href="/home"
           className="px-8 py-3 bg-main-color text-white font-bold w
           w-fit mt-8"
           type="button"
         >
           LOGIN
-        </button>
+        </Link>
       </div>
     </div>
   );

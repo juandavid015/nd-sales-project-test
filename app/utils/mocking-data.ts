@@ -3,28 +3,7 @@ import { faker } from '@faker-js/faker';
 import {
   Product, BranchOffice, Address, Client, Sale, SaleDetail, Vendor, Provider,
 } from '../types/data';
-
-// Define available countries
-const availableCountries = [
-  'Colombia', 'Argentina', 'Chile', 'Perú', 'Brazil', 'Uruguay',
-  'Venezuela', 'Costa rica', 'México', 'Ecuador',
-];
-
-// Function to generate country currencies
-const generateCountryCode = (country: string) => {
-  const parsedCountry = country?.toLowerCase();
-  if (parsedCountry === 'colombia') return 'COP';
-  if (parsedCountry === 'chile') return 'CLP';
-  if (parsedCountry === 'venezuela') return 'VED';
-  if (parsedCountry === 'argentina') return 'ARS';
-  if (parsedCountry === 'perú') return 'PEN';
-  if (parsedCountry === 'brazil') return 'BRL';
-  if (parsedCountry === 'uruguay') return 'UYU';
-  if (parsedCountry === 'costa rica') return 'CRC';
-  if (parsedCountry === 'méxico') return 'MXN';
-  if (parsedCountry === 'ecuador') return 'USD';
-  return '';
-};
+import { availableCountries, generateCountryCurrency } from './country-helpers';
 
 // Here the mocked data is stored
 const data = {
@@ -53,18 +32,27 @@ const generateAddress = () => {
 // Function to generate an array of branch offices...
 const generateBranchOffices = () => {
   const branchOffices: BranchOffice[] = [];
-  const maxAmount = 10;
-
-  for (let i = 0; i < maxAmount; i++) {
+  // const maxAmount = 10;
+  availableCountries.forEach((country) => {
     const newAddress = generateAddress();
     const newBranchOffice = {
       id: faker.database.mongodbObjectId(),
-      country: newAddress.country || '',
+      country,
       address_id: newAddress.id,
       address: newAddress,
     };
     branchOffices.push(newBranchOffice);
-  }
+  });
+  // for (let country of availableCountries) {
+  //   const newAddress = generateAddress();
+  //   const newBranchOffice = {
+  //     id: faker.database.mongodbObjectId(),
+  //     country: newAddress.country || '',
+  //     address_id: newAddress.id,
+  //     address: newAddress,
+  //   };
+  //   branchOffices.push(newBranchOffice);
+  // }
 
   return branchOffices;
 };
@@ -87,7 +75,6 @@ const generateProducts = () => {
     };
     products.push(newProduct);
   }
-
   return products;
 };
 
@@ -227,7 +214,7 @@ const generateSales = () => {
       sale_detail_ids: saleDetailIds,
       sale_details: saleDetails,
       total_amount: 0,
-      currency: generateCountryCode(branchOffice?.country),
+      currency: generateCountryCurrency(branchOffice?.country),
     };
 
     // Generate sale details and update sale object

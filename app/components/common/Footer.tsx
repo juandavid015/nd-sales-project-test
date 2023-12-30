@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { IconSales } from './Icons';
+import { IconLogo } from './Icons';
 
 export default function Footer() {
   return (
     <footer className="md:px-32 md:py-20 px-8 py-4 text-paragraph-color
-    flex flex-wrap justify-center items-center
-    gap-16 border-b-8 border-dark-blue "
+    flex flex-wrap justify-center items-center w-full
+    gap-16 mt-auto"
     >
-      <IconSales className="h-[80px] fill-main-color" />
+      <IconLogo className="h-[80px] fill-main-color" />
       <div className="flex flex-col">
         <p className="font-bold text-xl text-heading-color">
           COMPANY NAME

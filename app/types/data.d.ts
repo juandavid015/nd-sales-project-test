@@ -57,11 +57,11 @@ export interface Sale {
   id: string
   date: string
   seller_id: string
-  seller: Vendor
+  seller?: Vendor
   client_id: string
-  client: Client
+  client?: Client
   branch_office_id: string
-  branch_office: BranchOffice
+  branch_office?: BranchOffice
   sale_detail_ids: string[]
   sale_details: SaleDetail[]
   total_amount: number
@@ -73,7 +73,7 @@ export interface SaleDetail {
   sale_id: string
   quantity: number
   product_id: string
-  product: Product
+  product?: Product
   unit_price: number
   sub_total: number
 }
@@ -86,3 +86,11 @@ export interface Database {
   branch_offices: BranchOffice[] | []
   sales: Sale[] | [],
 }
+
+export type FormResult = {
+  type: 'success' | 'error' | null
+  message: string
+  data: {
+    [key:string]: any
+  }
+};

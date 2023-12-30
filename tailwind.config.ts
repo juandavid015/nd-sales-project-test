@@ -17,10 +17,15 @@ const config: Config = {
 
       },
       colors: {
+        'red-warning': '#ff001a',
+        blue: '#0062b8',
+        gray: '#dedede',
+        'gray-light': '#f6f6f9',
+        'blue-light': '#cedfe9',
         'blue-sky': '#edf3fc',
         'dark-blue': '#0c152c',
         'main-color': '#279AFF',
-        'heading-color': '#0c152c',
+        'heading-color': '#142348',
         'paragraph-color': 'rgba(12, 21, 44, 0.6)',
       },
       gridTemplateColumns: {

@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import openSans from './fonts';
-import Header from './components/common/Header';
-import Footer from './components/common/Footer';
 
 export const metadata: Metadata = {
   title: 'Company: sales management',
@@ -17,9 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
       <body className={openSans.variable}>
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );
