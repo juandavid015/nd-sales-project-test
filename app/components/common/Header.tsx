@@ -1,11 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 function Header() {
-  const pathname = usePathname();
-  console.log(pathname);
   return (
     <header className="sticky top-0">
       <nav className="w-full flex justify-end gap-6

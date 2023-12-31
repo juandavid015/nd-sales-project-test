@@ -2,8 +2,6 @@
 
 // Error components must be Client Components
 
-import { useEffect } from 'react';
-
 export default function Error({
   error,
   reset,
@@ -11,10 +9,10 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+  // useEffect(() => {
+  //   // Log the error to an error reporting service
+  //   console.error(error);
+  // }, [error]);
 
   return (
     <div className="w-full h-full flex flex-col
@@ -24,6 +22,7 @@ export default function Error({
       {error.message
         && <p>{error.message}</p>}
       <button
+        type="button"
         className="underline font-bold text-iris"
         onClick={
           // Attempt to recover by trying to re-render the segment

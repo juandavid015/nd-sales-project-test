@@ -12,6 +12,58 @@ import sortData from '../utils/sort';
 //   },
 // };
 export const fetchSale = {
+  getById: async (
+    id: string,
+  ) => new Promise<Sale | undefined>((resolve, reject) => {
+    try {
+      const saleData = [...db.sales];
+      const saleExists = saleData.find((sale) => sale.id === id);
+      let response: Sale | undefined;
+      if (saleExists) {
+        response = saleExists;
+        setTimeout(() => {
+          resolve(response);
+          return response;
+        }, 400);
+      } else {
+        setTimeout(() => {
+          reject(new Error('Error fetching sales'));
+        }, 400);
+      }
+      // Filters here
+
+      // Simulate a delay of 500ms to mimic an async operation
+    } catch (error: any) {
+      reject(new Error('Error fetching sales'));
+    }
+  }),
+  get: async (
+    limit = 10,
+    page = 1,
+    sortBy?: keyof Sale,
+    sortOrder: 'asc' | 'desc' = 'asc',
+  ) => new Promise<RequestResponse>((resolve, reject) => {
+    try {
+      let saleData = [...db.sales];
+
+      if (sortBy && sortOrder) {
+        saleData = sortData(saleData, sortBy, sortOrder);
+      }
+
+      // Filters here
+
+      // Simulate a delay of 500ms to mimic an async operation
+      setTimeout(() => {
+        // Paginate using utility function
+        const paginatedResult = paginate(saleData, page, limit);
+
+        resolve(paginatedResult);
+        return paginatedResult;
+      }, 400);
+    } catch (error: any) {
+      reject(new Error('Error fetching sales'));
+    }
+  }),
   post: async (sale: Sale) => new Promise<Sale | null>((resolve, reject) => {
     const hasRequiredProp = (property: string | string[]) => property?.length > 0;
     try {

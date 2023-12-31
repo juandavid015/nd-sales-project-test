@@ -8,6 +8,7 @@ import {
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const active = pathname.includes('/home');
   return (
     <nav className="py-8 bg-main-color text-white h-screen
     "
@@ -15,7 +16,7 @@ export default function Sidebar() {
       <ul>
         <li className={`py-4 px-8 w-full hover:bg-blue
         fill-white transition-all hover:scale-[0.95]
-        ${pathname === '/home' && 'bg-blue'}`}
+        ${active && 'bg-blue'}`}
         >
           <Link
             href="/home"

@@ -1,6 +1,7 @@
 import { fetchSale } from '@/app/services/api';
 import useForm from '@/app/hooks/useForm';
 import { useRef, useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Button from '../../common/Button';
 import LoadingSpinner from '../../common/LoadingSpinner';
 
@@ -10,7 +11,7 @@ export default function SubmitButton() {
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | undefined>(undefined); // Ref for the timer
-
+  const router = useRouter();
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
@@ -18,6 +19,7 @@ export default function SubmitButton() {
       setSale(defaultSaleValues);
       const messageResponse = 'Sale generated successfully!';
       setResult({ type: 'success', message: messageResponse, data: {} });
+      router.push('/home/sales');
     } catch (error:any) {
       // here should be a handler error function
       setResult({ type: 'error', message: error.message, data: {} });

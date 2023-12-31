@@ -1,4 +1,5 @@
 import Sidebar from '../components/common/Sidebar';
+import SubNavigation from '../components/common/SubNavigation';
 
 export default function AppLayout({
   children,
@@ -8,6 +9,7 @@ export default function AppLayout({
   return (
     <div className="flex w-full h-full bg-gray-light">
       <Sidebar />
+      <SubNavigation />
       {children}
     </div>
   );
