@@ -23,7 +23,7 @@ function Header() {
           </li>
         </ul>
         <Link
-          href="#login"
+          href="/home"
           className="text-main-color"
         >
           Login
